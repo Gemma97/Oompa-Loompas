@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import OompasReducer from './reducer_oompas';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  oompas: OompasReducer
 });
 
 export default rootReducer;

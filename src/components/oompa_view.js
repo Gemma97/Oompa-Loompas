@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-export default class App extends Component {
+class OompaView extends Component {
   render() {
     return (
       <div>
-        React simple starter
-        {this.props.children}
+        Oompa Loompa description.
       </div>
     );
   }
 }
+
+export default OompaView;

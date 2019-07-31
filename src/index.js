@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, IndexRoute } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 
-import App from './components/app';
+import MainView from './components/main_view';
+import OompaView from './components/oompa_view';
 import reducers from './reducers';
+import promise from 'redux-promise';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(
+  promise
+)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
     <div>
       <Switch>
-        <Route path="/" component={App} />
+        <Route exact path="/" component={MainView} />
+        <Route path="/oompa" component={OompaView} />
       </Switch>
     </div>
     </BrowserRouter>
