@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch, IndexRoute } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 
 import MainView from './components/main_view';
-import OompaView from './components/oompa_view';
+import DetailView from './components/detail_view';
 import reducers from './reducers';
 import promise from 'redux-promise';
 
@@ -19,7 +19,7 @@ ReactDOM.render(
     <div>
       <Switch>
         <Route exact path="/" component={MainView} />
-        <Route path="/oompa" component={OompaView} />
+        <Route path="/oompa" component={DetailView} />
       </Switch>
     </div>
     </BrowserRouter>

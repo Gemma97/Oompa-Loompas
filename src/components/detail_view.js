@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class OompaView extends Component {
+class DetailView extends Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class OompaView extends Component {
   }
 }
 
-export default OompaView;
+export default DetailView;
