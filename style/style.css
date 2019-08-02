@@ -1,19 +1,44 @@
+/* Search Bar */
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+input {
+  border-style: none;
+}
+
+.input-group {
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.search-icon {
+  width: auto;
+  max-height: 20px;
+  opacity: 0.5;
+}
+
+/* Oompas Main View */
 .oompas-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   list-style: none;
-  align-items: center;
+  margin: 0 auto;
+  padding: 0;
 }
 
 * {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-img {
+.oompa {
   width: auto;
   max-height: 250px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 40px;
 }
 
@@ -27,31 +52,52 @@ h2 {
   font-weight: 350 !important;
   font-size: 30px !important;
   color: grey !important;
-} 
-
-.name {
-    font-weight: bold;
-}
-
-.gender {
-    font-size: 12px;
-    color: grey;
-}
-
-.profession {
-    font-size: 12px;
-    font-style: italic;
-    color: grey;
-}
-
-.info {
-    line-height: 5px;
 }
 
 .title {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
+/* Oompas Info */
+.name {
+  font-weight: bold;
+}
+
+.gender {
+  font-size: 12px;
+  color: grey;
+}
+
+.profession {
+  font-size: 12px;
+  font-style: italic;
+  color: grey;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+  padding-bottom: 5px;
+}
+
+.info > * {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+/* Heading */
 .top-bar {
-    background-color: silver;
+  background-color: lightgrey;
+  max-height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.oompa-icon {
+  width: auto;
+  max-height: 20px;
+  margin: 10px;
+  margin-left: 60px;
+  margin-right: 30px;
 }

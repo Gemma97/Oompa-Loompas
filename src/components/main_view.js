@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOompas } from "../actions/index";
+import SearchBar from './search_bar';
 
 class MainView extends Component {
   componentWillMount() {
@@ -13,12 +14,14 @@ class MainView extends Component {
       return this.props.oompas.results.map(function(oompa) {
         return (
           <li key={oompa.id}>
-            <img src={oompa.image} />
+            <img className={"oompa"} src={oompa.image} />
             <div className={"info"}>
               <p className={"name"}>
                 {oompa.first_name} {oompa.last_name}
               </p>
-              <p className={"gender"}>{oompa.gender === "F" ? "Woman" : "Man"}</p>
+              <p className={"gender"}>
+                {oompa.gender === "F" ? "Woman" : "Man"}
+              </p>
               <p className={"profession"}>{oompa.profession}</p>
             </div>
           </li>
@@ -32,8 +35,13 @@ class MainView extends Component {
       //search bar
       <div>
         <div className={"top-bar"}>
+          <img
+            className={"oompa-icon"}
+            src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
+          />
           Oompa Loompa's Crew
         </div>
+        <SearchBar/>
         <div className={"title"}>
           <h1>Find your Oompa Loompa</h1>
           <h2>There are more than 100k</h2>
