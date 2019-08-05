@@ -21,6 +21,10 @@ input {
   opacity: 0.5;
 }
 
+::placeholder {
+  color: #373a3c;
+}
+
 /* Oompas Main View */
 .oompas-container {
   display: flex;
@@ -56,6 +60,9 @@ h2 {
 
 .title {
   margin-top: 50px;
+}
+
+.button {
 }
 
 /* Oompas Info */
