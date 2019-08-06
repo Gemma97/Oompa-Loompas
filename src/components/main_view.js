@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOompas } from "../actions/index";
+import { Link } from 'react-router-dom';
 //import SearchBar from './search_bar';
 
 class MainView extends Component {
@@ -53,11 +54,16 @@ class MainView extends Component {
         .map(function(oompa) {
           return (
             <li key={oompa.id}>
-              <img className={"oompa"} src={oompa.image} />
+              <Link to={"/oompa"} >
+                <img className={"oompa"} src={oompa.image} />
+              </Link>
               <div className={"info"}>
-                <p className={"name"}>
+                <Link 
+                  to={"/oompa"} 
+                  className={"name"}
+                >
                   {oompa.first_name} {oompa.last_name}
-                </p>
+                </Link>
                 <p className={"gender"}>
                   {oompa.gender === "F" ? "Woman" : "Man"}
                 </p>
