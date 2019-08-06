@@ -97,13 +97,13 @@ class MainView extends Component {
           <h2>There are more than 100k</h2>
         </div>
         <ul className="oompas-container">{this.renderOompas()}</ul>
-        <a className="btn btn-primary center-block button" onClick={this.showMore}>
+        <button className="btn btn-primary center-block" onClick={this.showMore}>
           {this.state.expanded ? (
             <span>Cargar menos Oompa Loompas</span>
           ) : (
             <span>Cargar más Oompa Loompas</span>
           )}
-        </a>
+        </button>
       </div>
     );
   }
