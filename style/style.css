@@ -99,6 +99,7 @@ button {
 
 a {
   color: #373a3c !important;
+  text-decoration: none;
 }
 
 
@@ -124,4 +125,26 @@ a {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   color: #373a3c !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/*Detail View*/
+.info-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 100px;
+  margin-top: 50px;
+}
+
+.oompa-detail {
+  max-height: 300px;
+  width: auto;
+  margin-right: 20px;
+}
+
+.description {
+  font-size: 12px;
+  margin-top: 20px;
 }
