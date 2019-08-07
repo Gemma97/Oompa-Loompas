@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchOompas } from "../actions/index";
-import { Link } from 'react-router-dom';
-//import SearchBar from './search_bar';
 
 class MainView extends Component {
   constructor(props) {
@@ -10,7 +9,7 @@ class MainView extends Component {
 
     this.state = {
       search: "",
-      oompasToShow: 10,
+      oompasToShow: 15,
       expanded: false
     };
 
@@ -26,16 +25,16 @@ class MainView extends Component {
   }
 
   showMore() {
-    this.state.oompasToShow === 10 ? (
-      this.setState({ oompasToShow: this.props.oompas.results.length, expanded: true })
-    ) : (
-      this.setState({ oompasToShow: 10, expanded: false })
-    )
+    this.state.oompasToShow === 15
+      ? this.setState({
+          oompasToShow: this.props.oompas.results.length,
+          expanded: true
+        })
+      : this.setState({ oompasToShow: 15, expanded: false });
   }
 
   renderOompas() {
     if (this.props.oompas.results) {
-      //per assegurar que les dades no són 'null'
       let filteredOompas = this.props.oompas.results.filter(oompa => {
         return (
           (oompa.first_name
@@ -49,25 +48,23 @@ class MainView extends Component {
               .indexOf(this.state.search.toLowerCase())) !== -1
         );
       });
+
       return filteredOompas
         .slice(0, this.state.oompasToShow)
         .map(function(oompa) {
           return (
             <li key={oompa.id}>
-              <Link to={"/oompa"} >
-                <img className={"oompa"} src={oompa.image} />
+              <Link to={"/oompa/" + oompa.id}>
+                <img className="oompa" src={oompa.image} />
               </Link>
-              <div className={"info"}>
-                <Link 
-                  to={"/oompa"} 
-                  className={"name"}
-                >
+              <div className="info">
+                <Link to={"/oompa/" + oompa.id} className="name">
                   {oompa.first_name} {oompa.last_name}
                 </Link>
-                <p className={"gender"}>
+                <p className="gender">
                   {oompa.gender === "F" ? "Woman" : "Man"}
                 </p>
-                <p className={"profession"}>{oompa.profession}</p>
+                <p className="profession">{oompa.profession}</p>
               </div>
             </li>
           );
@@ -78,32 +75,35 @@ class MainView extends Component {
   render() {
     return (
       <div>
-        <div className={"top-bar"}>
+        <div className="top-bar">
           <img
-            className={"oompa-icon"}
+            className="oompa-icon"
             src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
           />
           Oompa Loompa's Crew
         </div>
-        <div className={"search-bar"}>
-          <form className={"input-group"}>
+        <div className="search-bar">
+          <form className="input-group">
             <input
               value={this.state.search}
               onChange={this.onInputChange.bind(this)}
               placeholder="Search"
             />
             <img
-              className={"search-icon"}
+              className="search-icon"
               src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png"
             />
           </form>
         </div>
-        <div className={"title"}>
+        <div className="title">
           <h1>Find your Oompa Loompa</h1>
           <h2>There are more than 100k</h2>
         </div>
         <ul className="oompas-container">{this.renderOompas()}</ul>
-        <button className="btn btn-primary center-block" onClick={this.showMore}>
+        <button
+          className="btn btn-primary center-block"
+          onClick={this.showMore}
+        >
           {this.state.expanded ? (
             <span>Cargar menos Oompa Loompas</span>
           ) : (
