@@ -10,7 +10,8 @@ class MainView extends Component {
     this.state = {
       search: "",
       oompasToShow: 15,
-      expanded: false
+      expanded: false,
+      buttonShow: true
     };
 
     this.showMore = this.showMore.bind(this);
@@ -18,6 +19,7 @@ class MainView extends Component {
 
   onInputChange(event) {
     this.setState({ search: event.target.value });
+    this.setState({ buttonShow: false });
   }
 
   componentWillMount() {
@@ -70,9 +72,15 @@ class MainView extends Component {
           );
         });
     }
+    else {
+      <h1>There are no Oompa Loompas available at the moment. Try again later.</h1>
+    }
   }
 
-  render() {
+  render() { 
+
+    const { buttonShow } = this.state;
+
     return (
       <div>
         <div className="top-bar">
@@ -80,7 +88,7 @@ class MainView extends Component {
             className="oompa-icon"
             src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
           />
-          Oompa Loompa's Crew
+          <div className="header">Oompa Loompa's Crew</div>
         </div>
         <div className="search-bar">
           <form className="input-group">
@@ -100,16 +108,18 @@ class MainView extends Component {
           <h2>There are more than 100k</h2>
         </div>
         <ul className="oompas-container">{this.renderOompas()}</ul>
-        <button
-          className="btn btn-primary center-block"
-          onClick={this.showMore}
-        >
-          {this.state.expanded ? (
-            <span>Cargar menos Oompa Loompas</span>
-          ) : (
-            <span>Cargar más Oompa Loompas</span>
-          )}
-        </button>
+        {buttonShow && (
+          <button
+            className="btn btn-primary center-block"
+            onClick={this.showMore}
+          >
+            {this.state.expanded ? (
+              <span>Cargar menos Oompa Loompas</span>
+            ) : (
+              <span>Cargar más Oompa Loompas</span>
+            )}
+          </button>
+        )}
       </div>
     );
   }
