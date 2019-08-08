@@ -18,13 +18,13 @@ class DetailView extends Component {
     return (
       <Fragment>
         <div className="top-bar">
-          <img
-            className="oompa-icon"
-            src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
-          />
           <Link to="/" className="link">
+            <img
+              className="oompa-icon"
+              src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
+            />
             Oompa Loompa's Crew
-          </Link>{" "}
+          </Link>
           / {oompa.first_name} {oompa.last_name}
         </div>
         <div className="info-container">
