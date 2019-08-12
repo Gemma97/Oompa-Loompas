@@ -20,12 +20,14 @@ class DetailView extends Component {
         <div className="top-bar">
           <Link to="/" className="link">
             <img
-              className="oompa-icon"
+              className="header-icon"
               src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
             />
-            Oompa Loompa's Crew
           </Link>
-          / {oompa.first_name} {oompa.last_name}
+          <Link to="/" className="link">
+            <div className="header">Oompa Loompa's Crew /</div>
+          </Link>
+          <div className="header-name"> {oompa.first_name} {oompa.last_name}</div>
         </div>
         <div className="info-container">
           <img className="oompa-detail" src={oompa.image} />
