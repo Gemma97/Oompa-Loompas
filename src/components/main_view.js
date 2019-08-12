@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOompas } from "../actions/index";
+import SearchBar from "./search_bar";
 
 class MainView extends Component {
   constructor(props) {
@@ -11,16 +12,23 @@ class MainView extends Component {
       search: "",
       oompasToShow: 15,
       expanded: false,
-      buttonShow: true
     };
 
     this.showMore = this.showMore.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   onInputChange(event) {
     this.setState({ search: event.target.value });
-    this.setState({ buttonShow: false });
   }
+
+  /*onHideButton() {
+    if (filteredOompas < this.props.oompas.total) {
+      this.setState({ buttonHidden: true });
+    } else {
+      this.setState({ buttonHidden: false });
+    }
+  }*/
 
   componentWillMount() {
     this.props.fetchOompas();
@@ -59,6 +67,7 @@ class MainView extends Component {
               <Link to={"/oompa/" + oompa.id}>
                 <img className="oompa" src={oompa.image} />
               </Link>
+
               <div className="info">
                 <Link to={"/oompa/" + oompa.id} className="name">
                   {oompa.first_name} {oompa.last_name}
@@ -72,53 +81,44 @@ class MainView extends Component {
           );
         });
     }
-    else {
-      <h1>There are no Oompa Loompas available at the moment. Try again later.</h1>
-    }
   }
 
-  render() { 
-
-    const { buttonShow } = this.state;
-
+  render() {
     return (
       <div>
         <div className="top-bar">
           <img
-            className="oompa-icon"
+            className="header-icon"
             src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
           />
           <div className="header">Oompa Loompa's Crew</div>
         </div>
-        <div className="search-bar">
-          <form className="input-group">
-            <input
-              value={this.state.search}
-              onChange={this.onInputChange.bind(this)}
-              placeholder="Search"
-            />
-            <img
-              className="search-icon"
-              src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png"
-            />
-          </form>
-        </div>
+
+        <SearchBar newValue={this.state.search} onChange={this.onInputChange} />
+
         <div className="title">
           <h1>Find your Oompa Loompa</h1>
           <h2>There are more than 100k</h2>
         </div>
-        <ul className="oompas-container">{this.renderOompas()}</ul>
-        {buttonShow && (
-          <button
-            className="btn btn-primary center-block"
-            onClick={this.showMore}
-          >
-            {this.state.expanded ? (
-              <span>Cargar menos Oompa Loompas</span>
-            ) : (
-              <span>Cargar más Oompa Loompas</span>
-            )}
-          </button>
+
+        {this.props.oompas.total > 0 ? (
+          <Fragment>
+            <ul className="oompas-container">{this.renderOompas()}</ul>
+            <button
+              className="btn btn-primary center-block"
+              onClick={this.showMore}
+            >
+              {this.state.expanded ? (
+                <span>Cargar menos Oompa Loompas</span>
+              ) : (
+                <span>Cargar más Oompa Loompas</span>
+              )}
+            </button>
+          </Fragment>
+        ) : (
+          <p className="alert alert-danger alert-dismissible show">
+            There are no Oompa Loompas available at the moment. Try again later.
+          </p>
         )}
       </div>
     );
