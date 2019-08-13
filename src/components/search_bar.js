@@ -9,7 +9,10 @@ class SearchBar extends Component {
             value={this.props.newValue}
             onChange={this.props.onChange}
             placeholder="Search"
+            onClick={this.props.onClick}
+            onBlur={this.props.onBlur}
           />
+          <div className="divider"></div>
           <img
             className={"search-icon"}
             src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png"

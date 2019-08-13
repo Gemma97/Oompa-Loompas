@@ -12,6 +12,7 @@ class MainView extends Component {
       search: "",
       oompasToShow: 15,
       expanded: false,
+      showButton: true
     };
 
     this.showMore = this.showMore.bind(this);
@@ -22,13 +23,15 @@ class MainView extends Component {
     this.setState({ search: event.target.value });
   }
 
-  /*onHideButton() {
-    if (filteredOompas < this.props.oompas.total) {
-      this.setState({ buttonHidden: true });
-    } else {
-      this.setState({ buttonHidden: false });
-    }
-  }*/
+  hideButton() {
+    this.setState({ showButton: false });
+  }
+
+  showButton() {
+    if (this.state.search === "") {
+      this.setState({ showButton: true });
+    } 
+  }
 
   componentWillMount() {
     this.props.fetchOompas();
@@ -84,8 +87,10 @@ class MainView extends Component {
   }
 
   render() {
+    const { showButton } = this.state;
     return (
       <div>
+        
         <div className="top-bar">
           <img
             className="header-icon"
@@ -94,26 +99,31 @@ class MainView extends Component {
           <div className="header">Oompa Loompa's Crew</div>
         </div>
 
-        <SearchBar newValue={this.state.search} onChange={this.onInputChange} />
-
-        <div className="title">
-          <h1>Find your Oompa Loompa</h1>
-          <h2>There are more than 100k</h2>
-        </div>
-
+        <SearchBar
+          newValue={this.state.search}
+          onChange={this.onInputChange}
+          onClick={this.hideButton.bind(this)}
+          onBlur={this.showButton.bind(this)}
+        />
+        
+        <h1>Find your Oompa Loompa</h1>
+        <h2>There are more than 100k</h2>
+        {console.log(this.state.search)}
         {this.props.oompas.total > 0 ? (
           <Fragment>
             <ul className="oompas-container">{this.renderOompas()}</ul>
-            <button
-              className="btn btn-primary center-block"
-              onClick={this.showMore}
-            >
-              {this.state.expanded ? (
-                <span>Cargar menos Oompa Loompas</span>
-              ) : (
-                <span>Cargar más Oompa Loompas</span>
-              )}
-            </button>
+            {showButton && (
+              <button
+                className="btn btn-primary center-block"
+                onClick={this.showMore}
+              >
+                {this.state.expanded ? (
+                  <span>Cargar menos Oompa Loompas</span>
+                ) : (
+                  <span>Cargar más Oompa Loompas</span>
+                )}
+              </button>
+            )}
           </Fragment>
         ) : (
           <p className="alert alert-danger alert-dismissible show">
@@ -124,6 +134,8 @@ class MainView extends Component {
     );
   }
 }
+
+
 
 function mapStateToProps(state) {
   return { oompas: state.oompas.all };
