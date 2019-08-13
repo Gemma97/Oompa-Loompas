@@ -13,6 +13,7 @@ input {
   border-style: none;
   margin-left: 4px !important;
   margin-right: 9px !important;
+  width: 150px;
 }
 
 .input-group {
@@ -20,18 +21,28 @@ input {
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
+  margin-right: 50px;
+  display: flex !important;
+  align-items: center;
 }
 
 .search-icon {
   width: auto;
-  max-height: 20px;
-  opacity: 0.5;
-  margin-bottom: 4px;
-  margin-right: 4px;
+  max-height: 15px;
+  opacity: 0.8;
+  margin: 4px;
 }
 
 ::placeholder {
   color: #373a3c;
+}
+
+.divider {
+  border-right: 2px solid lightgray;
+  height: 20px;
+  width: 1px;
+  margin: 0;
+  margin-right: 4px;
 }
 
 
@@ -55,6 +66,7 @@ input {
 h1 {
   text-align: center;
   font-weight: 400 !important;
+  margin-top: 50px !important;
 }
 
 h2 {
@@ -65,19 +77,16 @@ h2 {
   margin-bottom: 50px !important;
 }
 
-.title {
-  margin-top: 50px;
-}
-
 button {
   margin-top: 50px !important;
-  margin-bottom: 50px !important;
 }
 
 
 /* Oompas Info */
 .name {
   font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 .gender, .profession {
@@ -89,24 +98,18 @@ button {
   font-style: italic;
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  padding-top: 2px;
-  padding-bottom: 5px;
-}
-
 .info > * {
-  margin-top: 2px;
   margin-bottom: 2px;
 }
 
 a {
   color: #373a3c !important;
+  cursor: pointer;
 }
 
 a:focus, a:hover {
   text-decoration: none !important;
+  color: #0275d8 !important;
 }
 
 
@@ -134,11 +137,6 @@ a:focus, a:hover {
 
 .header-name {
   color: #0275d8;
-}
-
-.link {
-  color: #373a3c !important;
-  cursor: pointer;
 }
 
 
