@@ -30,7 +30,7 @@ class MainView extends Component {
   showButton() {
     if (this.state.search === "") {
       this.setState({ showButton: true });
-    } 
+    }
   }
 
   componentWillMount() {
@@ -62,35 +62,42 @@ class MainView extends Component {
         );
       });
 
-      return filteredOompas
-        .slice(0, this.state.oompasToShow)
-        .map(function(oompa) {
-          return (
-            <li key={oompa.id}>
-              <Link to={"/oompa/" + oompa.id}>
-                <img className="oompa" src={oompa.image} />
-              </Link>
-
-              <div className="info">
-                <Link to={"/oompa/" + oompa.id} className="name">
-                  {oompa.first_name} {oompa.last_name}
+      if (filteredOompas.length === 0) {
+        return (
+          <p className="alert alert-danger alert-dismissible show">
+            There are no Oompa Loompas that fit your search.
+          </p>
+        );
+      } else {
+        return filteredOompas
+          .slice(0, this.state.oompasToShow)
+          .map(function(oompa) {
+            return (
+              <li key={oompa.id}>
+                <Link to={"/oompa/" + oompa.id}>
+                  <img className="oompa" src={oompa.image} />
                 </Link>
-                <p className="gender">
-                  {oompa.gender === "F" ? "Woman" : "Man"}
-                </p>
-                <p className="profession">{oompa.profession}</p>
-              </div>
-            </li>
-          );
-        });
+                <div className="info">
+                  <Link to={"/oompa/" + oompa.id} className="name">
+                    {oompa.first_name} {oompa.last_name}
+                  </Link>
+                  <p className="gender">
+                    {oompa.gender === "F" ? "Woman" : "Man"}
+                  </p>
+                  <p className="profession">{oompa.profession}</p>
+                </div>
+              </li>
+            );
+          });
+      }
     }
   }
 
   render() {
     const { showButton } = this.state;
+
     return (
       <div>
-        
         <div className="top-bar">
           <img
             className="header-icon"
@@ -105,13 +112,14 @@ class MainView extends Component {
           onClick={this.hideButton.bind(this)}
           onBlur={this.showButton.bind(this)}
         />
-        
+
         <h1>Find your Oompa Loompa</h1>
         <h2>There are more than 100k</h2>
-        {console.log(this.state.search)}
+
         {this.props.oompas.total > 0 ? (
           <Fragment>
             <ul className="oompas-container">{this.renderOompas()}</ul>
+
             {showButton && (
               <button
                 className="btn btn-primary center-block"
@@ -134,8 +142,6 @@ class MainView extends Component {
     );
   }
 }
-
-
 
 function mapStateToProps(state) {
   return { oompas: state.oompas.all };

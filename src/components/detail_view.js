@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchOompa } from "../actions/index";
 
 class DetailView extends Component {
