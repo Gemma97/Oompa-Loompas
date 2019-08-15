@@ -6,7 +6,6 @@ body {
 .search-bar {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
 }
 
 input {
@@ -88,7 +87,6 @@ button {
 .name {
   font-weight: bold;
   font-size: 20px;
-  margin-top: 10px;
 }
 
 .gender, .profession {
@@ -160,6 +158,8 @@ a:focus, a:hover {
 .description {
   font-size: 12px;
   margin-top: 20px;
+  width: 400px;
+  text-align: justify;
 }
 
 @media only screen and (max-width: 992px) {
@@ -172,5 +172,6 @@ a:focus, a:hover {
     width: 400px;
   }
 }
+
 
 

@@ -65,7 +65,7 @@ class MainView extends Component {
       if (filteredOompas.length === 0) {
         return (
           <p className="alert alert-danger alert-dismissible show">
-            There are no Oompa Loompas that fit your search.
+            There are no Oompa Loompas that fit your search
           </p>
         );
       } else {
