@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 
 class SearchBar extends Component {
   render() {
+    const { newValue, onChange, onClick, onBlur } = this.props;
     return (
       <div className={"search-bar"}>
         <form className={"input-group"}>
           <input
-            value={this.props.newValue}
-            onChange={this.props.onChange}
+            value={newValue}
+            onChange={onChange}
             placeholder="Search"
-            onClick={this.props.onClick}
-            onBlur={this.props.onBlur}
+            onClick={onClick}
+            onBlur={onBlur}
           />
           <div className="divider"></div>
           <img

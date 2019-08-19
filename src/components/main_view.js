@@ -3,62 +3,55 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOompas } from "../actions/index";
 import SearchBar from "./search_bar";
+//import styles from "../../style/style.css";
+
+// importar Styles
+// fitxer amb strings
 
 class MainView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      search: "",
-      oompasToShow: 15,
-      expanded: false,
-      showButton: true
-    };
-
-    this.showMore = this.showMore.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-  }
-
-  onInputChange(event) {
-    this.setState({ search: event.target.value });
-  }
-
-  hideButton() {
-    this.setState({ showButton: false });
-  }
-
-  showButton() {
-    if (this.state.search === "") {
-      this.setState({ showButton: true });
-    }
-  }
+  state = {
+    search: "",
+    oompasToShow: 15,
+    expanded: false,
+    showButton: true
+  };
 
   componentWillMount() {
     this.props.fetchOompas();
   }
 
-  showMore() {
+  onInputChange = event => {
+    this.setState({ search: event.target.value });
+  };
+
+  hideButton = () => {
+    this.setState({ showButton: false });
+  };
+
+  showButton = () => {
+    if (this.state.search === "") {
+      this.setState({ showButton: true });
+    }
+  };
+
+  showMore = () => {
     this.state.oompasToShow === 15
       ? this.setState({
           oompasToShow: this.props.oompas.results.length,
           expanded: true
         })
       : this.setState({ oompasToShow: 15, expanded: false });
-  }
+  };
 
   renderOompas() {
+    const { search } = this.state;
+
     if (this.props.oompas.results) {
       let filteredOompas = this.props.oompas.results.filter(oompa => {
         return (
-          (oompa.first_name
-            .toLowerCase()
-            .indexOf(this.state.search.toLowerCase()) &&
-            oompa.last_name
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) &&
-            oompa.profession
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase())) !== -1
+          (oompa.first_name.toLowerCase().indexOf(search.toLowerCase()) &&
+            oompa.last_name.toLowerCase().indexOf(search.toLowerCase()) &&
+            oompa.profession.toLowerCase().indexOf(search.toLowerCase())) !== -1
         );
       });
 
@@ -97,7 +90,7 @@ class MainView extends Component {
     const { showButton } = this.state;
 
     return (
-      <div>
+      <div className="body">
         <div className="top-bar">
           <img
             className="header-icon"
@@ -109,13 +102,12 @@ class MainView extends Component {
         <SearchBar
           newValue={this.state.search}
           onChange={this.onInputChange}
-          onClick={this.hideButton.bind(this)}
-          onBlur={this.showButton.bind(this)}
+          onClick={this.hideButton}
+          onBlur={this.showButton}
         />
 
         <h1>Find your Oompa Loompa</h1>
         <h2>There are more than 100k</h2>
-
         {this.props.oompas.total > 0 ? (
           <Fragment>
             <ul className="oompas-container">{this.renderOompas()}</ul>
@@ -143,11 +135,4 @@ class MainView extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { oompas: state.oompas.all };
-}
-
-export default connect(
-  mapStateToProps,
-  { fetchOompas: fetchOompas }
-)(MainView);
+export default connect(state => ({ oompas: state.oompas.all }), { fetchOompas })(MainView);

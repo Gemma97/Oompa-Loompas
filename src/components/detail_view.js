@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOompa } from "../actions/index";
+//import styles from "../../style/style.css";
 
 class DetailView extends Component {
   componentWillMount() {
@@ -27,7 +28,10 @@ class DetailView extends Component {
           <Link to="/" className="link">
             <div className="header">Oompa Loompa's Crew /</div>
           </Link>
-          <div className="header-name"> {oompa.first_name} {oompa.last_name}</div>
+          <div className="header-name">
+            {" "}
+            {oompa.first_name} {oompa.last_name}
+          </div>
         </div>
         <div className="info-container">
           <img className="oompa-detail" src={oompa.image} />
@@ -45,11 +49,4 @@ class DetailView extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { oompa: state.oompas.oompa };
-}
-
-export default connect(
-  mapStateToProps,
-  { fetchOompa }
-)(DetailView);
+export default connect(state => ({ oompa: state.oompas.oompa }), { fetchOompa })(DetailView);
