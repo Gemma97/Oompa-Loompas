@@ -3,10 +3,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOompas } from "../actions/index";
 import SearchBar from "./search_bar";
-//import styles from "../../style/style.css";
+import {
+  NO_RESULTS,
+  HEADER,
+  TITLE,
+  SUBTITLE,
+  SHOW_MORE,
+  SHOW_LESS,
+  NO_OOMPAS
+} from "./strings";
+import styles from "../../style/style.css";
 
-// importar Styles
-// fitxer amb strings
 
 class MainView extends Component {
   state = {
@@ -58,7 +65,7 @@ class MainView extends Component {
       if (filteredOompas.length === 0) {
         return (
           <p className="alert alert-danger alert-dismissible show">
-            There are no Oompa Loompas that fit your search
+            {NO_RESULTS}
           </p>
         );
       } else {
@@ -90,13 +97,13 @@ class MainView extends Component {
     const { showButton } = this.state;
 
     return (
-      <div className="body">
+      <div className={styles.body}>
         <div className="top-bar">
           <img
             className="header-icon"
             src="https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png"
           />
-          <div className="header">Oompa Loompa's Crew</div>
+          <div className="header">{HEADER}</div>
         </div>
 
         <SearchBar
@@ -106,8 +113,8 @@ class MainView extends Component {
           onBlur={this.showButton}
         />
 
-        <h1>Find your Oompa Loompa</h1>
-        <h2>There are more than 100k</h2>
+        <h1>{TITLE}</h1>
+        <h2>{SUBTITLE}</h2>
         {this.props.oompas.total > 0 ? (
           <Fragment>
             <ul className="oompas-container">{this.renderOompas()}</ul>
@@ -118,16 +125,16 @@ class MainView extends Component {
                 onClick={this.showMore}
               >
                 {this.state.expanded ? (
-                  <span>Cargar menos Oompa Loompas</span>
+                  <span>{SHOW_LESS}</span>
                 ) : (
-                  <span>Cargar más Oompa Loompas</span>
+                  <span>{SHOW_MORE}</span>
                 )}
               </button>
             )}
           </Fragment>
         ) : (
           <p className="alert alert-danger alert-dismissible show">
-            There are no Oompa Loompas available at the moment. Try again later.
+            {NO_OOMPAS}
           </p>
         )}
       </div>
@@ -135,4 +142,7 @@ class MainView extends Component {
   }
 }
 
-export default connect(state => ({ oompas: state.oompas.all }), { fetchOompas })(MainView);
+export default connect(
+  state => ({ oompas: state.oompas.all }),
+  { fetchOompas }
+)(MainView);
