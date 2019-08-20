@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOompa } from "../actions/index";
-//import styles from "../../style/style.css";
+import "../../style/style.css";
 
 class DetailView extends Component {
   componentWillMount() {

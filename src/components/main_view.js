@@ -12,7 +12,7 @@ import {
   SHOW_LESS,
   NO_OOMPAS
 } from "./strings";
-import styles from "../../style/style.css";
+import "../../style/style.css";
 
 
 class MainView extends Component {
@@ -94,10 +94,10 @@ class MainView extends Component {
   }
 
   render() {
-    const { showButton } = this.state;
+    const { showButton, search } = this.state;
 
     return (
-      <div className={styles.body}>
+      <div className="body">
         <div className="top-bar">
           <img
             className="header-icon"
@@ -107,7 +107,7 @@ class MainView extends Component {
         </div>
 
         <SearchBar
-          newValue={this.state.search}
+          newValue={search}
           onChange={this.onInputChange}
           onClick={this.hideButton}
           onBlur={this.showButton}
